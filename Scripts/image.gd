@@ -9,6 +9,6 @@ func _on_image_request_request_completed(_result: int, response_code: int, _head
 		return
 	var img = Image.new()
 	if img.load_png_from_buffer(body) == OK:
-		var texture = ImageTexture.new()
-		texture = texture.create_from_image(img)
-		self.set_texture(texture)
+		var img_texture = ImageTexture.new()
+		img_texture = ImageTexture.create_from_image(img)
+		self.set_texture(img_texture)

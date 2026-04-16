@@ -7,7 +7,7 @@ extends Control
 @export var lat = 37.718274
 @export var lon = -97.286031
 
-@onready var forcast: Label = $BG/Inner/Forcast
+@onready var forecast: Label = $BG/Inner/Forecast
 
 var grid_url = "https://api.weather.gov/gridpoints/TOP/%s,%s/forecast"
 var lon_lat_url = "https://api.weather.gov/points/%s,%s"
@@ -17,9 +17,7 @@ func _ready() -> void:
 	var url = lon_lat_url % [lat, lon]
 	lon_lat_request.request(url)
 
-
-
-func _on_grid_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
+func _on_grid_request_request_completed(_result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
 	if response_code != 200:
 		return
 
@@ -29,13 +27,13 @@ func _on_grid_request_request_completed(result: int, response_code: int, headers
 	if data == null:
 		return
 
-	forcast.text = data.get("properties").get("periods").get(0).get("detailedForecast")
-	var icon = data.get("properties").get("periods").get(0).get("icon")
+	forecast.text = data.get("properties").get("periods").get(0).get("detailedForecast")
+	var icon_url = data.get("properties").get("periods").get(0).get("icon")
 
-	icon = icon.replace("medium", "large")
-	print(icon)
-	image.get_image(icon)
-func _on_lon_lat_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
+	icon_url = icon_url.replace("medium", "large")
+	
+	image.get_image(icon_url)
+func _on_lon_lat_request_request_completed(_result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
 	if response_code != 200:
 		return
 
@@ -54,7 +52,6 @@ func _on_lon_lat_request_request_completed(result: int, response_code: int, head
 	grid_y = int(grid_y)
 
 	var url = grid_url % [grid_x, grid_y]
-	print(url)
 	grid_request.request(url)
 
 func _on_timer_timeout() -> void:
