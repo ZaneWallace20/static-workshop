@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://c61uupyvlsxx1"]
+
+[ext_resource type="Script" uid="uid://bd4pplmvrh1s7" path="res://Scripts/main.gd" id="1_jjgbg"]
+
+[sub_resource type="Gradient" id="Gradient_jjgbg"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bo1nx"]
+gradient = SubResource("Gradient_jjgbg")
+fill_to = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8gbba"]
+texture = SubResource("GradientTexture2D_bo1nx")
+
+[sub_resource type="LabelSettings" id="LabelSettings_jjgbg"]
+font_size = 60
+
+[node name="Main" type="Control" unique_id=676827443]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jjgbg")
+lat = null
+lon = null
+
+[node name="Timer" type="Timer" parent="." unique_id=317485133]
+wait_time = 300.0
+autostart = true
+
+[node name="GridRequest" type="HTTPRequest" parent="." unique_id=1345818524]
+
+[node name="LonLatRequest" type="HTTPRequest" parent="." unique_id=203112595]
+
+[node name="BG" type="Panel" parent="." unique_id=37096567]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_8gbba")
+
+[node name="Inner" type="Control" parent="BG" unique_id=1552653143]
+custom_minimum_size = Vector2(1900, 1060)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -950.0
+offset_top = -530.0
+offset_right = 950.0
+offset_bottom = 530.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Forcast" type="Label" parent="BG/Inner" unique_id=364854262]
+layout_mode = 0
+offset_right = 679.0
+offset_bottom = 245.0
+text = "DATA"
+label_settings = SubResource("LabelSettings_jjgbg")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="request_completed" from="GridRequest" to="." method="_on_grid_request_request_completed"]
+[connection signal="request_completed" from="LonLatRequest" to="." method="_on_lon_lat_request_request_completed"]
