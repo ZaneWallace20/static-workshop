@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cy1km05qenmud"]
+
+[ext_resource type="Script" uid="uid://r540tgbteb02" path="res://Scripts/image.gd" id="1_23taa"]
+
+[node name="Image" type="TextureRect" unique_id=1037546497]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 30.0
+offset_bottom = 30.0
+script = ExtResource("1_23taa")
+
+[node name="ImageRequest" type="HTTPRequest" parent="." unique_id=1794818592]
+
+[connection signal="request_completed" from="ImageRequest" to="." method="_on_image_request_request_completed"]

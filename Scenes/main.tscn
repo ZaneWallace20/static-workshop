@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bd4pplmvrh1s7" path="res://Scripts/main.gd" id="1_jjgbg"]
 [ext_resource type="LabelSettings" uid="uid://d2e1350ujmftd" path="res://Styles/label_settings.tres" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://cy1km05qenmud" path="res://Scenes/image.tscn" id="2_jjvhh"]
 [ext_resource type="Script" uid="uid://b4eygj1nbfvp8" path="res://Scripts/timer.gd" id="3_8gbba"]
 
 [sub_resource type="Gradient" id="Gradient_jjgbg"]
@@ -54,6 +55,21 @@ offset_right = 950.0
 offset_bottom = 530.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Image" parent="BG/Inner" unique_id=1037546497 instance=ExtResource("2_jjvhh")]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="Forcast" type="Label" parent="BG/Inner" unique_id=364854262]
 layout_mode = 0

@@ -2,6 +2,7 @@ extends Control
 
 @onready var grid_request: HTTPRequest = $GridRequest
 @onready var lon_lat_request: HTTPRequest = $LonLatRequest
+@onready var image: TextureRect = $BG/Inner/Image
 
 @export var lat = 37.718274
 @export var lon = -97.286031
@@ -16,9 +17,6 @@ func _ready() -> void:
 	var url = lon_lat_url % [lat, lon]
 	lon_lat_request.request(url)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func _on_grid_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
@@ -32,7 +30,11 @@ func _on_grid_request_request_completed(result: int, response_code: int, headers
 		return
 
 	forcast.text = data.get("properties").get("periods").get(0).get("detailedForecast")
+	var icon = data.get("properties").get("periods").get(0).get("icon")
 
+	icon = icon.replace("medium", "large")
+	print(icon)
+	image.get_image(icon)
 func _on_lon_lat_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
 	if response_code != 200:
 		return
